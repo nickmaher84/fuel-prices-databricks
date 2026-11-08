@@ -1,0 +1,8 @@
+bundle:
+  name: fuel-prices
+
+targets:
+  dev:
+    default: true
+    workspace:
+      profile: fuel-prices

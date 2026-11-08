@@ -1,0 +1,22 @@
+# Databricks bundle working files and local state
+.databricks/
+
+# Python
+__pycache__/
+.pytest_cache/
+.venv/
+
+# IDE
+.idea/
+.vscode/
+
+# Local data
+*.csv
+
+# dbt
+target/
+dbt_packages/
+logs/
+# Local dbt profiles hold credentials
+profiles.yml
+.user.yml
