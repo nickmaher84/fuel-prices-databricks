@@ -1,0 +1,18 @@
+version: 2
+
+models:
+  - name: station_changes
+    description: Each distinct version of a station and the dates it appeared.
+    columns:
+      - name: line_hash
+        data_tests: [unique, not_null]
+      - name: station_id
+        data_tests: [not_null]
+
+  - name: price_changes
+    description: Each distinct price line and the dates it appeared.
+    columns:
+      - name: line_hash
+        data_tests: [unique, not_null]
+      - name: station_id
+        data_tests: [not_null]

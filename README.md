@@ -78,6 +78,8 @@ The models in `dbt/` build on the bronze tables. To run them, add a dbt profile
 for your workspace and run `dbt build` from the `dbt` folder:
 
 - `stg_stations`, `stg_prices`: typed views over bronze
+- `station_changes`, `price_changes`: each distinct line and the span of dates
+  it appeared in, built incrementally
 
 ## Fetching the files
 
