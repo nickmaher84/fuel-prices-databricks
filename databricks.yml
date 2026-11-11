@@ -5,6 +5,12 @@ include:
   - jobs.yml
   - storage.yml
 
+variables:
+  warehouse_id:
+    description: SQL warehouse that runs the dbt models
+    lookup:
+      warehouse: Serverless Starter Warehouse
+
 targets:
   dev:
     default: true

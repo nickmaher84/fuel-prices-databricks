@@ -15,6 +15,11 @@ resources:
         - environment_key: default
           spec:
             environment_version: "5"
+        - environment_key: dbt
+          spec:
+            environment_version: "5"
+            dependencies:
+              - dbt-databricks>=1.8.0,<2.0.0
 
       tasks:
         - task_key: load_stations
@@ -42,3 +47,16 @@ resources:
               - ${resources.schemas.fuel_prices.catalog_name}.${resources.schemas.fuel_prices.name}.quarantine_prices
               - ${resources.schemas.fuel_prices.catalog_name}.${resources.schemas.fuel_prices.name}.bronze_files
               - /Volumes/${resources.volumes.checkpoints.catalog_name}/${resources.volumes.checkpoints.schema_name}/${resources.volumes.checkpoints.name}/landing_prices
+
+        - task_key: transform
+          depends_on:
+            - task_key: load_stations
+            - task_key: load_prices
+          environment_key: dbt
+          dbt_task:
+            project_directory: dbt
+            warehouse_id: ${var.warehouse_id}
+            catalog: ${resources.schemas.fuel_prices.catalog_name}
+            schema: ${resources.schemas.fuel_prices.name}
+            commands:
+              - dbt build

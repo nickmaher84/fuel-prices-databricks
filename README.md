@@ -8,8 +8,8 @@ into Databricks, deployed with a Declarative Automation Bundle.
 ## How it works
 
 ```
-fetch script ──▶ landing folder ──▶ bronze tables
-(you run it)     (job starts on      (Auto Loader)
+fetch script ──▶ landing folder ──▶ bronze tables ──▶ dbt models
+(you run it)     (job starts on      (Auto Loader)     (staging, changes, marts)
                   new files)
 ```
 
@@ -23,6 +23,13 @@ fetch script ──▶ landing folder ──▶ bronze tables
    Lines it can't split into columns go to `quarantine_stations` or
    `quarantine_prices` instead of failing the load, and each file gets a row in
    `bronze_files` (size, upload time, content hash, rows loaded and rejected).
+4. dbt then builds:
+   - `stg_stations`, `stg_prices`: typed views over bronze
+   - `station_changes`, `price_changes`: each distinct line and the span of dates
+     it appeared in, built incrementally
+   - `current_stations`, `current_prices`: the latest version of each
+   - `historical_prices`: the price for each station and fuel on each day, from when
+     each price was submitted (a view, so filter by station)
 
 Everything lives in the `workspace.fuel_prices` schema.
 
@@ -64,6 +71,9 @@ token = <your-token>
 To use a different profile name, change `workspace.profile` under the `dev` target
 in `databricks.yml`.
 
+dbt runs on the SQL warehouse named `Serverless Starter Warehouse`. To use another,
+change the `warehouse_id` lookup in `databricks.yml`.
+
 ## Deploy and run
 
 ```bash
@@ -71,18 +81,6 @@ databricks bundle validate
 databricks bundle deploy
 databricks bundle run daily
 ```
-
-## dbt models
-
-The models in `dbt/` build on the bronze tables. To run them, add a dbt profile
-for your workspace and run `dbt build` from the `dbt` folder:
-
-- `stg_stations`, `stg_prices`: typed views over bronze
-- `station_changes`, `price_changes`: each distinct line and the span of dates
-  it appeared in, built incrementally
-- `current_stations`, `current_prices`: the latest version of each
-- `historical_prices`: the price for each station and fuel on each day, from when
-  each price was submitted (a view, so filter by station)
 
 ## Fetching the files
 
