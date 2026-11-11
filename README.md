@@ -5,18 +5,50 @@ Loads Italy's daily fuel
 and [prices](https://www.mimit.gov.it/images/exportCSV/prezzo_alle_8.csv) from mimit.gov.it
 into Databricks, deployed with a Declarative Automation Bundle.
 
+## How it works
+
+```
+fetch script ──▶ landing folder ──▶ bronze tables
+(you run it)     (job starts on      (Auto Loader)
+                  new files)
+```
+
+1. `scripts/fetch_daily.py` downloads both daily files and uploads them to the
+   landing folder of the `raw` volume. It has to run from an Italian connection
+   (see [Fetching the files](#fetching-the-files)).
+2. New files in the landing folder start the `fuel-prices-daily` job, through a file
+   arrival trigger.
+3. `scripts/load_files.py` uses Auto Loader to find files it hasn't processed before.
+   Each line becomes a row of strings in `bronze_stations` or `bronze_prices`.
+   Lines it can't split into columns go to `quarantine_stations` or
+   `quarantine_prices` instead of failing the load, and each file gets a row in
+   `bronze_files` (size, upload time, content hash, rows loaded and rejected).
+
 Everything lives in the `workspace.fuel_prices` schema.
 
 ### Raw file layout
 
 Each file is named after the date it covers (from its `Estrazione del` line, or its
-filename for older files). The fetch script uploads new files to the landing folder:
+filename for older files). New files go to the landing folder, and Auto Loader moves
+them to the archive 7 days after loading:
 
 ```
-/Volumes/workspace/fuel_prices/raw/landing/
-├── prices/prezzo_alle_8_2026-11-10.csv
-└── stations/anagrafica_impianti_attivi_2026-11-10.csv
+/Volumes/workspace/fuel_prices/raw/
+├── landing/
+│   ├── prices/prezzo_alle_8_2026-11-10.csv
+│   └── stations/anagrafica_impianti_attivi_2026-11-10.csv
+├── prices/prezzo_alle_8_2026-11-06.csv
+└── stations/anagrafica_impianti_attivi_2026-11-06.csv
 ```
+
+Files only move during a run that has new files to process, so they can stay in
+the landing folder for a few days longer than 7. Bronze rows record the archive
+path, so they stay valid after the move.
+
+Auto Loader reads each file once. Replacing a file it has already processed won't
+reload it; upload under a new name or reset the checkpoint in the `checkpoints`
+volume instead. Uploading to the landing folder only starts the job for new file
+names, so after resetting a checkpoint, start the job by hand.
 
 ## Setup
 
@@ -32,11 +64,12 @@ token = <your-token>
 To use a different profile name, change `workspace.profile` under the `dev` target
 in `databricks.yml`.
 
-## Deploy
+## Deploy and run
 
 ```bash
 databricks bundle validate
 databricks bundle deploy
+databricks bundle run daily
 ```
 
 ## Fetching the files
@@ -91,6 +124,24 @@ How and where to run it is up to you: a cron job, a cloud scheduler in an Italia
 region, or by hand. For [Pythonista](https://omz-software.com/pythonista/) on iOS,
 `scripts/pythonista_fetch.py` is a ready-made wrapper that reads the host and token
 from the iOS keychain; see the top of that file for setup.
+
+The job starts on its own when new files arrive. If a run fails, fix the cause and
+start it by hand with `databricks bundle run daily`; Auto Loader picks up any files
+it hasn't processed yet.
+
+## Source data quirks
+
+The parsing rules handle these, so most need no attention:
+
+- Files back to 2015 use `;` or `|` delimiters, and header names vary.
+- Older files have no `Estrazione del` line; the date comes from the filename.
+- Some fields contain the delimiter, such as names ending
+  ` | gestori.prezzibenzina.it`. These are joined back together and kept as published.
+- Missing values may be blank or the text `NULL`.
+- The 2022-12-27 price file has pieces of a tar archive spliced into it; these
+  are removed, and torn lines go to quarantine.
+- Station types changed from `Altro` / `Strada Statale` / `Autostradale` (2015) to
+  `Stradale` / `Autostradale`, and are kept as published.
 
 ## Test
 

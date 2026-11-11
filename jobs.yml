@@ -1,0 +1,44 @@
+resources:
+  jobs:
+    daily:
+      name: fuel-prices-daily
+      max_concurrent_runs: 1
+
+      # Runs when the fetch script uploads new files to the landing folder.
+      trigger:
+        pause_status: UNPAUSED
+        file_arrival:
+          url: /Volumes/${resources.volumes.raw.catalog_name}/${resources.volumes.raw.schema_name}/${resources.volumes.raw.name}/landing/
+          wait_after_last_change_seconds: 60
+
+      environments:
+        - environment_key: default
+          spec:
+            environment_version: "5"
+
+      tasks:
+        - task_key: load_stations
+          environment_key: default
+          spark_python_task:
+            python_file: scripts/load_files.py
+            parameters:
+              - stations
+              - /Volumes/${resources.volumes.raw.catalog_name}/${resources.volumes.raw.schema_name}/${resources.volumes.raw.name}/landing/stations/
+              - /Volumes/${resources.volumes.raw.catalog_name}/${resources.volumes.raw.schema_name}/${resources.volumes.raw.name}/stations/
+              - ${resources.schemas.fuel_prices.catalog_name}.${resources.schemas.fuel_prices.name}.bronze_stations
+              - ${resources.schemas.fuel_prices.catalog_name}.${resources.schemas.fuel_prices.name}.quarantine_stations
+              - ${resources.schemas.fuel_prices.catalog_name}.${resources.schemas.fuel_prices.name}.bronze_files
+              - /Volumes/${resources.volumes.checkpoints.catalog_name}/${resources.volumes.checkpoints.schema_name}/${resources.volumes.checkpoints.name}/landing_stations
+
+        - task_key: load_prices
+          environment_key: default
+          spark_python_task:
+            python_file: scripts/load_files.py
+            parameters:
+              - prices
+              - /Volumes/${resources.volumes.raw.catalog_name}/${resources.volumes.raw.schema_name}/${resources.volumes.raw.name}/landing/prices/
+              - /Volumes/${resources.volumes.raw.catalog_name}/${resources.volumes.raw.schema_name}/${resources.volumes.raw.name}/prices/
+              - ${resources.schemas.fuel_prices.catalog_name}.${resources.schemas.fuel_prices.name}.bronze_prices
+              - ${resources.schemas.fuel_prices.catalog_name}.${resources.schemas.fuel_prices.name}.quarantine_prices
+              - ${resources.schemas.fuel_prices.catalog_name}.${resources.schemas.fuel_prices.name}.bronze_files
+              - /Volumes/${resources.volumes.checkpoints.catalog_name}/${resources.volumes.checkpoints.schema_name}/${resources.volumes.checkpoints.name}/landing_prices
