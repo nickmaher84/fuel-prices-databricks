@@ -16,3 +16,5 @@ models:
       +materialized: incremental
       +incremental_strategy: merge
       +unique_key: line_hash
+    marts:
+      +materialized: view

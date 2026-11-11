@@ -80,6 +80,9 @@ for your workspace and run `dbt build` from the `dbt` folder:
 - `stg_stations`, `stg_prices`: typed views over bronze
 - `station_changes`, `price_changes`: each distinct line and the span of dates
   it appeared in, built incrementally
+- `current_stations`, `current_prices`: the latest version of each
+- `historical_prices`: the price for each station and fuel on each day, from when
+  each price was submitted (a view, so filter by station)
 
 ## Fetching the files
 

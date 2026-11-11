@@ -1,0 +1,17 @@
+version: 2
+
+models:
+  - name: current_stations
+    description: The latest version of every station ever seen.
+    columns:
+      - name: station_id
+        data_tests: [unique, not_null]
+
+  - name: current_prices
+    description: Prices from the most recent file.
+
+  - name: historical_prices
+    description: >
+      The price for each station, fuel and service type on each day, taken from
+      when each price was submitted rather than which files it appeared in. A view,
+      so filter by station when querying.
