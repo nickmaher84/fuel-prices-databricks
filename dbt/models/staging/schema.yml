@@ -1,0 +1,28 @@
+version: 2
+
+models:
+  - name: stg_stations
+    description: Typed station registry rows, with blank and 'NULL' text as nulls.
+    columns:
+      - name: line_hash
+        data_tests: [not_null]
+      - name: station_id
+        data_tests: [not_null]
+      - name: extraction_date
+        data_tests: [not_null]
+
+  - name: stg_prices
+    description: >
+      Typed price rows. Tests only check recently loaded rows, as this view
+      covers every price line ever loaded.
+    columns:
+      - name: line_hash
+        data_tests:
+          - not_null:
+              config:
+                where: "loaded_at >= current_date() - interval 1 day"
+      - name: station_id
+        data_tests:
+          - not_null:
+              config:
+                where: "loaded_at >= current_date() - interval 1 day"

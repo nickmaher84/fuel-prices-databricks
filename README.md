@@ -72,6 +72,13 @@ databricks bundle deploy
 databricks bundle run daily
 ```
 
+## dbt models
+
+The models in `dbt/` build on the bronze tables. To run them, add a dbt profile
+for your workspace and run `dbt build` from the `dbt` folder:
+
+- `stg_stations`, `stg_prices`: typed views over bronze
+
 ## Fetching the files
 
 mimit.gov.it only accepts connections from Italian addresses. Databricks Free

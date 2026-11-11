@@ -1,0 +1,14 @@
+name: fuel_prices
+version: "1.0.0"
+config-version: 2
+
+profile: fuel_prices
+
+clean-targets:
+  - target
+  - dbt_packages
+
+models:
+  fuel_prices:
+    staging:
+      +materialized: view

@@ -1,0 +1,11 @@
+version: 2
+
+sources:
+  - name: bronze
+    database: "{{ target.database }}"
+    schema: "{{ target.schema }}"
+    tables:
+      - name: bronze_stations
+        description: One row per line of each station registry file, as strings.
+      - name: bronze_prices
+        description: One row per line of each daily price file, as strings.
