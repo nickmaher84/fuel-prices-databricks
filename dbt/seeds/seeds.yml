@@ -1,0 +1,32 @@
+version: 2
+
+seeds:
+  - name: provinces
+    description: >
+      Italian provinces by the two-letter code used in the station registry, with
+      their region and ISTAT geographic area. Built from ISTAT's Elenco comuni
+      italiani (CC BY), plus the Sardinian provinces abolished in 2016, which
+      appear in older station files.
+    columns:
+      - name: province_code
+        description: Two-letter sigla automobilistica, as in the station registry.
+        data_tests: [unique, not_null]
+      - name: province_name
+        data_tests: [not_null]
+      - name: region_name
+        data_tests: [not_null]
+      - name: area
+        description: ISTAT ripartizione geografica (Nord-ovest, Nord-est, Centro, Sud, Isole).
+        data_tests:
+          - accepted_values:
+              arguments:
+                values:
+                  - Nord-ovest
+                  - Nord-est
+                  - Centro
+                  - Sud
+                  - Isole
+      - name: nuts3_code
+        description: NUTS 2024 level 3 code, for joining EU statistics. Blank for abolished provinces.
+      - name: is_current
+        description: False for provinces that no longer exist.

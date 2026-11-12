@@ -10,9 +10,6 @@ __pycache__/
 .idea/
 .vscode/
 
-# Local data
-*.csv
-
 # dbt
 target/
 dbt_packages/

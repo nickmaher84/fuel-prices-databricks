@@ -1,0 +1,112 @@
+province_code,province_name,region_name,area,nuts3_code,is_current
+AG,Agrigento,Sicilia,Isole,ITG14,true
+AL,Alessandria,Piemonte,Nord-ovest,ITC18,true
+AN,Ancona,Marche,Centro,ITI32,true
+AO,Valle d'Aosta/Vallée d'Aoste,Valle d'Aosta/Vallée d'Aoste,Nord-ovest,ITC20,true
+AP,Ascoli Piceno,Marche,Centro,ITI34,true
+AQ,L'Aquila,Abruzzo,Sud,ITF11,true
+AR,Arezzo,Toscana,Centro,ITI18,true
+AT,Asti,Piemonte,Nord-ovest,ITC17,true
+AV,Avellino,Campania,Sud,ITF34,true
+BA,Bari,Puglia,Sud,ITF47,true
+BG,Bergamo,Lombardia,Nord-ovest,ITC46,true
+BI,Biella,Piemonte,Nord-ovest,ITC13,true
+BL,Belluno,Veneto,Nord-est,ITH33,true
+BN,Benevento,Campania,Sud,ITF32,true
+BO,Bologna,Emilia-Romagna,Nord-est,ITH55,true
+BR,Brindisi,Puglia,Sud,ITF44,true
+BS,Brescia,Lombardia,Nord-ovest,ITC47,true
+BT,Barletta-Andria-Trani,Puglia,Sud,ITF48,true
+BZ,Bolzano/Bozen,Trentino-Alto Adige/Südtirol,Nord-est,ITH10,true
+CA,Cagliari,Sardegna,Isole,ITG2F,true
+CB,Campobasso,Molise,Sud,ITF22,true
+CE,Caserta,Campania,Sud,ITF31,true
+CH,Chieti,Abruzzo,Sud,ITF14,true
+CI,Carbonia-Iglesias,Sardegna,Isole,,false
+CL,Caltanissetta,Sicilia,Isole,ITG15,true
+CN,Cuneo,Piemonte,Nord-ovest,ITC16,true
+CO,Como,Lombardia,Nord-ovest,ITC42,true
+CR,Cremona,Lombardia,Nord-ovest,ITC4A,true
+CS,Cosenza,Calabria,Sud,ITF61,true
+CT,Catania,Sicilia,Isole,ITG17,true
+CZ,Catanzaro,Calabria,Sud,ITF63,true
+EN,Enna,Sicilia,Isole,ITG16,true
+FC,Forlì-Cesena,Emilia-Romagna,Nord-est,ITH58,true
+FE,Ferrara,Emilia-Romagna,Nord-est,ITH56,true
+FG,Foggia,Puglia,Sud,ITF46,true
+FI,Firenze,Toscana,Centro,ITI14,true
+FM,Fermo,Marche,Centro,ITI35,true
+FR,Frosinone,Lazio,Centro,ITI45,true
+GE,Genova,Liguria,Nord-ovest,ITC33,true
+GO,Gorizia,Friuli-Venezia Giulia,Nord-est,ITH43,true
+GR,Grosseto,Toscana,Centro,ITI1A,true
+IM,Imperia,Liguria,Nord-ovest,ITC31,true
+IS,Isernia,Molise,Sud,ITF21,true
+KR,Crotone,Calabria,Sud,ITF62,true
+LC,Lecco,Lombardia,Nord-ovest,ITC43,true
+LE,Lecce,Puglia,Sud,ITF45,true
+LI,Livorno,Toscana,Centro,ITI16,true
+LO,Lodi,Lombardia,Nord-ovest,ITC49,true
+LT,Latina,Lazio,Centro,ITI44,true
+LU,Lucca,Toscana,Centro,ITI12,true
+MB,Monza e della Brianza,Lombardia,Nord-ovest,ITC4D,true
+MC,Macerata,Marche,Centro,ITI33,true
+ME,Messina,Sicilia,Isole,ITG13,true
+MI,Milano,Lombardia,Nord-ovest,ITC4C,true
+MN,Mantova,Lombardia,Nord-ovest,ITC4B,true
+MO,Modena,Emilia-Romagna,Nord-est,ITH54,true
+MS,Massa-Carrara,Toscana,Centro,ITI11,true
+MT,Matera,Basilicata,Sud,ITF52,true
+NA,Napoli,Campania,Sud,ITF33,true
+NO,Novara,Piemonte,Nord-ovest,ITC15,true
+NU,Nuoro,Sardegna,Isole,ITG2E,true
+OG,Ogliastra,Sardegna,Isole,,false
+OR,Oristano,Sardegna,Isole,ITG2G,true
+OT,Olbia-Tempio,Sardegna,Isole,,false
+PA,Palermo,Sicilia,Isole,ITG12,true
+PC,Piacenza,Emilia-Romagna,Nord-est,ITH51,true
+PD,Padova,Veneto,Nord-est,ITH36,true
+PE,Pescara,Abruzzo,Sud,ITF13,true
+PG,Perugia,Umbria,Centro,ITI21,true
+PI,Pisa,Toscana,Centro,ITI17,true
+PN,Pordenone,Friuli-Venezia Giulia,Nord-est,ITH41,true
+PO,Prato,Toscana,Centro,ITI15,true
+PR,Parma,Emilia-Romagna,Nord-est,ITH52,true
+PT,Pistoia,Toscana,Centro,ITI13,true
+PU,Pesaro e Urbino,Marche,Centro,ITI31,true
+PV,Pavia,Lombardia,Nord-ovest,ITC48,true
+PZ,Potenza,Basilicata,Sud,ITF51,true
+RA,Ravenna,Emilia-Romagna,Nord-est,ITH57,true
+RC,Reggio Calabria,Calabria,Sud,ITF65,true
+RE,Reggio nell'Emilia,Emilia-Romagna,Nord-est,ITH53,true
+RG,Ragusa,Sicilia,Isole,ITG18,true
+RI,Rieti,Lazio,Centro,ITI42,true
+RM,Roma,Lazio,Centro,ITI43,true
+RN,Rimini,Emilia-Romagna,Nord-est,ITH59,true
+RO,Rovigo,Veneto,Nord-est,ITH37,true
+SA,Salerno,Campania,Sud,ITF35,true
+SI,Siena,Toscana,Centro,ITI19,true
+SO,Sondrio,Lombardia,Nord-ovest,ITC44,true
+SP,La Spezia,Liguria,Nord-ovest,ITC34,true
+SR,Siracusa,Sicilia,Isole,ITG19,true
+SS,Sassari,Sardegna,Isole,ITG2D,true
+SU,Sud Sardegna,Sardegna,Isole,ITG2H,true
+SV,Savona,Liguria,Nord-ovest,ITC32,true
+TA,Taranto,Puglia,Sud,ITF43,true
+TE,Teramo,Abruzzo,Sud,ITF12,true
+TN,Trento,Trentino-Alto Adige/Südtirol,Nord-est,ITH20,true
+TO,Torino,Piemonte,Nord-ovest,ITC11,true
+TP,Trapani,Sicilia,Isole,ITG11,true
+TR,Terni,Umbria,Centro,ITI22,true
+TS,Trieste,Friuli-Venezia Giulia,Nord-est,ITH44,true
+TV,Treviso,Veneto,Nord-est,ITH34,true
+UD,Udine,Friuli-Venezia Giulia,Nord-est,ITH42,true
+VA,Varese,Lombardia,Nord-ovest,ITC41,true
+VB,Verbano-Cusio-Ossola,Piemonte,Nord-ovest,ITC14,true
+VC,Vercelli,Piemonte,Nord-ovest,ITC12,true
+VE,Venezia,Veneto,Nord-est,ITH35,true
+VI,Vicenza,Veneto,Nord-est,ITH32,true
+VR,Verona,Veneto,Nord-est,ITH31,true
+VS,Medio Campidano,Sardegna,Isole,,false
+VT,Viterbo,Lazio,Centro,ITI41,true
+VV,Vibo Valentia,Calabria,Sud,ITF64,true

@@ -18,3 +18,14 @@ models:
       +unique_key: line_hash
     marts:
       +materialized: view
+
+seeds:
+  fuel_prices:
+    provinces:
+      +column_types:
+        province_code: string
+        province_name: string
+        region_name: string
+        area: string
+        nuts3_code: string
+        is_current: boolean

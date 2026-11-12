@@ -6,6 +6,15 @@ models:
     columns:
       - name: station_id
         data_tests: [unique, not_null]
+      - name: province_code
+        description: Joined to the provinces seed for province, region and area.
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('provinces')
+                field: province_code
+              config:
+                severity: warn
 
   - name: current_prices
     description: Prices from the most recent file.
